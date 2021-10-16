@@ -11,8 +11,6 @@ import Main from './pages/Main';
 const App = () => {
 
   const history = useHistory()
-
-
   return (
     <div>
       <Router history={history}>
