@@ -2,6 +2,7 @@ import React from 'react';
 import {
   useHistory
 } from "react-router-dom";
+import TextField from '@mui/material/TextField';
 
 
 const Login = () => {
@@ -18,8 +19,12 @@ const Login = () => {
 
     <div>
       <h1>ログイン画面</h1>
+      <TextField id="standard-basic" label="email" variant="standard" />
+      <TextField id="standard-basic" label="password" variant="standard" />
+      
       <div><button onClick={toCreateUser}>CreateUserへ</button></div>
       <div><button onClick={toMain}>Mainへ</button></div>
+       
     </div>
   );
 
