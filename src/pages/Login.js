@@ -20,17 +20,13 @@ const Login = () => {
   const toMain = () => {
     const result = login(email, password)
     console.log(result, "=======")
-    if (result === "succes") {
+    if (result === "success") {
       hisotry.push('Main')
     }
     else if (result === "error") {
       setError
         ("User作成に失敗しました。")
     }
-
-
-
-    hisotry.push('/Main')
   }
 
   return (
