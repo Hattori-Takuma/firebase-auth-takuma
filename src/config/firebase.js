@@ -1,8 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { getApps, initializeApp } from 'firebase/app'
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -14,7 +15,32 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+
 const apps = getApps
 if (!apps.length) {
   initializeApp(firebaseConfig)
+}
+export const auth = getAuth();
+
+export const createUser = (email, password) => {
+
+  createUserWithEmailAndPassword(auth, email, password)
+
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      console.log(user)
+
+      return "aaa"
+      // ...
+    })
+    .catch((error) => {
+      // const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+      console.log(errorMessage)
+
+      return "bbb"
+    });
+
 }

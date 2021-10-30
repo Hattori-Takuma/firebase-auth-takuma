@@ -23,7 +23,7 @@ const Main = () => {
     <div>
       <h1>Main画面</h1>
 
-      <Button onClick={toLogin}>Login</Button>
+      <Button onClick={toLogin}>ログアウト</Button>
 
 
     </div>
