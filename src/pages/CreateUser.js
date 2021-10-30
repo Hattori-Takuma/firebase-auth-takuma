@@ -14,20 +14,15 @@ const CreateUser = () => {
     hisotry.push('/')
   }
   const toMain = () => {
-
     // eslint-disable-next-line
-    {
-
-      createUser(email, password)
-      if ("aaa") {
-        hisotry.push('Main')
-      }
-      else if ("bbb") {
-        setError
-          ("User作成に失敗しました。")
-      }
+    createUser(email, password)
+    if ("aaa") {
+      hisotry.push('Main')
     }
-
+    else if ("bbb") {
+      setError
+        ("User作成に失敗しました。")
+    }
   }
 
   return (
