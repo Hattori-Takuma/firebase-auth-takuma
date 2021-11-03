@@ -17,15 +17,15 @@ const Login = () => {
     hisotry.push('/CreateUser')
   }
 
-  const toMain = () => {
-    const result = login(email, password)
+  const toMain = async () => {
+    const result = await login(email, password)
     console.log(result, "=======")
     if (result === "success") {
-      hisotry.push('Main')
+      hisotry.push('/Main')
     }
     else if (result === "error") {
       setError
-        ("User作成に失敗しました。")
+        ("ログインに失敗しました。")
     }
   }
 

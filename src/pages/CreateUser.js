@@ -13,21 +13,27 @@ const CreateUser = () => {
   const toLogin = () => {
     hisotry.push('/')
   }
-  const toMain = () => {
+  const toMain = async () => {
     // eslint-disable-next-line
-    createUser(email, password)
-    if ("aaa") {
-      hisotry.push('Main')
+    const result2 = await createUser(email, password)
+    console.log(result2, "=======")
+    if (result2 === "success") {
+      hisotry.push('/Main')
     }
-    else if ("bbb") {
+    else if (result2 === "error") {
+      console.log("ユーザー作成失敗")
       setError
         ("User作成に失敗しました。")
     }
   }
 
+
+
+
+
   return (
     <div>
-      <h1>CreateUser画面</h1>
+      <h1>ユーザー作成画面</h1>
       <div>
         <TextField id="outlined-basic" label="email" variant="outlined" onChange={e => setEmail(e.target.value)} />
         <TextField id="filled-basic" label="password" variant="filled" onChange={e => setPassword(e.target.value)} />
@@ -35,7 +41,7 @@ const CreateUser = () => {
 
       <button onClick={toLogin}>Login画面に戻る</button><br />
       <button onClick={toMain}>ログイン</button>
-      {error}
+      <div>{error}</div>
 
 
 

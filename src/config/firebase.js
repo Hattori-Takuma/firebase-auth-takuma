@@ -22,34 +22,36 @@ if (!apps.length) {
 }
 export const auth = getAuth();
 
-export const createUser = (email, password) => {
-
-  createUserWithEmailAndPassword(auth, email, password)
+export const createUser = async (email, password) => {
+  // eslint-disable-next-line 
+  let result2 = ""
+  console.log("createUser")
+  await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in
       const user = userCredential.user;
-      console.log(user)
-
-      return "aaa"
+      console.log("s")
+      result2 = "success"
       // ...
     })
     .catch((error) => {
-      // const errorCode = error.code;
+      //const errorCode = error.code;
       const errorMessage = error.message;
       // ..
       console.log(errorMessage)
-      return "bbb"
+      result2 = "error"
     });
+  return result2
 }
 
-export const login = (email, password) => {
+export const login = async (email, password) => {
   let result = ""
   console.log(email, password)
-  signInWithEmailAndPassword(auth, email, password)
+  await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       // eslint-disable-next-line
       console.log("s")
+
       result = "success"
 
     })
