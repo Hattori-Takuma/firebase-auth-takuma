@@ -3,6 +3,8 @@ import {
   useHistory
 } from "react-router-dom";
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import { createUser } from '../config/firebase'
 
 const CreateUser = () => {
@@ -28,19 +30,20 @@ const CreateUser = () => {
   }
 
 
-
-
-
   return (
     <div>
       <h1>ユーザー作成画面</h1>
       <div>
-        <TextField id="outlined-basic" label="email" variant="outlined" onChange={e => setEmail(e.target.value)} />
-        <TextField id="filled-basic" label="password" variant="filled" onChange={e => setPassword(e.target.value)} />
-      </div>
+        <TextField label="email" color="secondary" focused onChange={e => setEmail(e.target.value)} />
+        <TextField label="password" variant="filled" color="success" focused onChange={e => setPassword(e.target.value)} />
 
-      <button onClick={toLogin}>Login画面に戻る</button><br />
-      <button onClick={toMain}>ログイン</button>
+
+      </div>
+      <Stack direction="row" spacing={2}>
+        <Button onClick={toLogin}>Login画面に戻る</Button>
+
+        <Button onClick={toMain}>sign up</Button>
+      </Stack>
       <div>{error}</div>
 
 

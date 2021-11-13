@@ -28,6 +28,7 @@ export const createUser = async (email, password) => {
   console.log("createUser")
   await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
+      // eslint-disable-next-line 
       const user = userCredential.user;
       console.log("s")
       result2 = "success"
