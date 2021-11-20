@@ -3,10 +3,13 @@ import {
   useHistory
 } from "react-router-dom";
 
+
 //import { Button } from "@mui/material/Button"
 //import { Button } from '@mui/material';
 import Button from '@material-ui/core/Button'
-import { logout } from '../config/firebase'
+import { logout, user } from '../config/firebase'
+import Avatar from '@mui/material/Avatar';
+
 
 
 
@@ -35,9 +38,16 @@ const Main = () => {
 
 
 
+
+
   return (
     <div>
       <h1>Main画面</h1>
+      <div>UserName：{user.displayName}</div>
+      <div>Email：{user.email}</div>
+      <Avatar alt="Remy Sharp" src={user.photoURL} />
+
+
 
       <Button onClick={toLogin}>ログアウト</Button>
 

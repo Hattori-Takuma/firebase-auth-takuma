@@ -5,7 +5,10 @@ import {
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { login } from '../config/firebase';
+import { login, googleLogin } from '../config/firebase';
+// eslint-disable-next-line
+import { ConstructionOutlined } from '@mui/icons-material';
+
 
 const Login = () => {
 
@@ -31,6 +34,24 @@ const Login = () => {
     }
   }
 
+  const google = async () => {
+    const result4 = await googleLogin()
+
+    if (result4 === "success") {
+      hisotry.push('/Main')
+      console.log("Provider")
+    }
+    else if (result4 === "error") {
+      setError
+        ("ログインに失敗しました。")
+    }
+  }
+
+
+
+
+
+
   return (
 
     <div>
@@ -46,6 +67,11 @@ const Login = () => {
       </Stack>
 
       <div>{error}</div>
+
+
+      <div>
+        <Button onClick={google}>Google</Button>
+      </div>
     </div>
   );
 

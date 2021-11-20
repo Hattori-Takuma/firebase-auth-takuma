@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { getApps, initializeApp } from 'firebase/app'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
@@ -15,6 +16,49 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+
+
+export const googleLogin = async () => {
+  const provider = new GoogleAuthProvider();
+  //provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  //const auth = getAuth();
+  //auth.languageCode = 'it';
+  //provider.setCustomParameters({ 'login_hint': 'user@example.com'});
+
+  let result4 = ""
+
+  await signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      // eslint-disable-next-line
+      const token = credential.accessToken;
+      // The signed-in user info.
+      // eslint-disable-next-line
+      const user = result.user;
+      // ...
+      // eslint-disable-next-line
+      result4 = "success"
+
+    }).catch((error) => {
+      // Handle Errors here.
+      // eslint-disable-next-line
+      const errorCode = error.code;
+      // eslint-disable-next-line
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      // eslint-disable-next-line
+      const email = error.email;
+      // The AuthCredential type that was used.
+      // eslint-disable-next-line
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+      result4 = "error"
+    });
+  return result4
+
+}
+
 
 const apps = getApps
 if (!apps.length) {
@@ -85,4 +129,19 @@ export const logout = async () => {
       console.log("ee")
     });
   return result3
+}
+
+
+export const user = auth.currentUser;
+if (user !== null) {
+  // The user object has basic properties such as display name, email, etc.
+  const displayName = user.displayName;
+  const email = user.email;
+  const photoURL = user.photoURL;
+  const emailVerified = user.emailVerified;
+
+  // The user's ID, unique to the Firebase project. Do NOT use
+  // this value to authenticate with your backend server, if
+  // you have one. Use User.getToken() instead.
+  const uid = user.uid;
 }
