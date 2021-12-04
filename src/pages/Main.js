@@ -36,16 +36,22 @@ const Main = () => {
     }
   }
 
+  //  <div>UserName：{user.displayName}</div>
+  //  <div>Email：{user.email}</div>
+  //  <Avatar src={user.photoURL} />
 
-
-
+  console.log(user)
 
   return (
     <div>
-      <h1>Main画面</h1>
+      {/* <h1>Main画面</h1>
+      <div>UserName：{user.displayName}</div>
       <div>UserName：{user.displayName}</div>
       <div>Email：{user.email}</div>
-      <Avatar alt="Remy Sharp" src={user.photoURL} />
+      <Avatar src={user.photoURL} /> */}
+
+
+
 
 
 
@@ -60,4 +66,3 @@ const Main = () => {
 };
 
 export default Main;
-

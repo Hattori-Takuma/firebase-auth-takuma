@@ -38,7 +38,8 @@ export const googleLogin = async () => {
       const user = result.user;
       // ...
       // eslint-disable-next-line
-      result4 = "success"
+      console.log(user, 'user check')
+      result4 = user
 
     }).catch((error) => {
       // Handle Errors here.
@@ -53,6 +54,7 @@ export const googleLogin = async () => {
       // eslint-disable-next-line
       const credential = GoogleAuthProvider.credentialFromError(error);
       // ...
+      console.log(errorMessage, 'error message check')
       result4 = "error"
     });
   return result4

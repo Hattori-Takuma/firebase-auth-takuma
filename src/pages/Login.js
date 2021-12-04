@@ -1,3 +1,4 @@
+
 import { React, useState } from 'react';
 import {
   useHistory
@@ -36,15 +37,19 @@ const Login = () => {
 
   const google = async () => {
     const result4 = await googleLogin()
-
-    if (result4 === "success") {
+    console.log(result4.displayName)
+    if (result4.uid !== "") {
       hisotry.push('/Main')
-      console.log("Provider")
+      // , { params: user }
     }
-    else if (result4 === "error") {
-      setError
-        ("ログインに失敗しました。")
-    }
+    // if (result4 === "success") {
+    //   hisotry.push('/Main')
+    //   console.log("Provider")
+    // }
+    // else if (result4 === "error") {
+    //   setError
+    //     ("ログインに失敗しました。")
+    // }
   }
 
 
