@@ -3,16 +3,11 @@ import {
   useHistory
 } from "react-router-dom";
 
-
 //import { Button } from "@mui/material/Button"
 //import { Button } from '@mui/material';
 import Button from '@material-ui/core/Button'
-import { logout, user } from '../config/firebase'
+import { logout, user, createDataInFirebase, readData } from '../config/firebase'
 import Avatar from '@mui/material/Avatar';
-
-
-
-
 
 
 
@@ -35,35 +30,43 @@ const Main = () => {
         ("User作成に失敗しました。")
     }
   }
-
-  //  <div>UserName：{user.displayName}</div>
-  //  <div>Email：{user.email}</div>
-  //  <Avatar src={user.photoURL} />
-
   console.log(user)
+
+
+  const createFunc = async () => {
+    console.log('start')
+    const res = await createDataInFirebase()
+    console.log('fin', res)
+  }
+
+  const read = async () => {
+    console.log("read")
+    await readData()
+  }
 
 
   return (
     <div>
+
       <h1>Main画面</h1>
+      <h1 style={{ color: "blue" }}>ログイン成功</h1>
       {/* <div>UserName：{user.displayName}</div>
       <div>UserName：{user.displayName}</div>
       <div>Email：{user.email}</div>
       <Avatar src={user.photoURL} /> */}
 
-
-
-
-
-
       <Button onClick={toLogin}>ログアウト</Button>
-
-
       <div>{error}</div>
+
+      <Button onClick={createFunc}>DBへ保存</Button>
+      <Button onClick={read}>DB読み取り</Button>
+
+
     </div>
 
 
   );
 };
+
 
 export default Main;

@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { getApps, initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
+import { getFirestore, addDoc, collection, query, getDocs } from 'firebase/firestore'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
@@ -147,3 +147,39 @@ if (user !== null) {
   // you have one. Use User.getToken() instead.
   const uid = user.uid;
 }
+
+
+export const db = getFirestore();
+
+export const createDataInFirebase = async () => {
+  let returnObj = ""
+  console.log('firebase start')
+  try {
+    const docRef = await addDoc(collection(db, "users"), {
+      first: "AdaAda",
+      last: "lovelace",
+      born: 1815
+    });
+    returnObj = "test1"
+    console.log("Document written with ID:", docRef.id);
+  } catch (e) {
+    returnObj = "test2"
+    console.errror("Error adding document: ", e);
+  }
+  return returnObj
+}
+
+export const readData = async () => {
+  console.log('readData')
+  const q = query(collection(db, "users"));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id, " => ", doc.data());
+  });
+};
+
+
+
+
+
+
