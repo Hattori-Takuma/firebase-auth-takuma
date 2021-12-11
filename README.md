@@ -72,3 +72,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 mui compornent buttun text
+
+
+
+アップデート
+ドキュメントから指定
+
+デリート
+ドキュメントを指定してクリックしたら削除
