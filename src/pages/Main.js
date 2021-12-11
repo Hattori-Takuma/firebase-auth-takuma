@@ -42,10 +42,11 @@ const Main = () => {
 
   console.log(user)
 
+
   return (
     <div>
-      {/* <h1>Main画面</h1>
-      <div>UserName：{user.displayName}</div>
+      <h1>Main画面</h1>
+      {/* <div>UserName：{user.displayName}</div>
       <div>UserName：{user.displayName}</div>
       <div>Email：{user.email}</div>
       <Avatar src={user.photoURL} /> */}

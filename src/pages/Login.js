@@ -39,8 +39,7 @@ const Login = () => {
     const result4 = await googleLogin()
     console.log(result4.displayName)
     if (result4.uid !== "") {
-      hisotry.push('/Main')
-      // , { params: user }
+      hisotry.push('/Main', { params: result4.user })
     }
     // if (result4 === "success") {
     //   hisotry.push('/Main')
