@@ -6,8 +6,10 @@ import {
 //import { Button } from "@mui/material/Button"
 //import { Button } from '@mui/material';
 import Button from '@material-ui/core/Button'
+import TextField from '@mui/material/TextField';
 import { logout, user, createDataInFirebase, readData, updateData, deleteData } from '../config/firebase'
 import Avatar from '@mui/material/Avatar';
+import { getFirestore, addDoc, collection } from 'firebase/firestore'
 
 
 
@@ -55,6 +57,31 @@ const Main = () => {
 
 
 
+
+  const [first, setFirst] = useState()
+  const [last, setLast] = useState()
+  const [born, setBorn] = useState()
+
+  const db = getFirestore();
+
+  const myData = async () => {
+    let returnObj = ""
+    console.log('firebase start')
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+        first: { first },
+        last: { last },
+        born: { born }
+      });
+      returnObj = "test1"
+      console.log("Document written with ID:", docRef.id);
+    } catch (e) {
+      returnObj = "test2"
+      console.errror("Error adding document: ", e);
+    }
+  }
+
+
   return (
     <div>
 
@@ -65,14 +92,47 @@ const Main = () => {
       <div>Email：{user.email}</div>
       <Avatar src={user.photoURL} /> */}
 
-      <Button onClick={toLogin}>ログアウト</Button>
+
       <div>{error}</div>
 
-      <Button onClick={createFunc}>DBへ保存</Button>
-      <Button onClick={read}>DB読み取り</Button>
-      <Button onClick={handleUpdate}>Update</Button>
-      <Button onClick={handleDelete}>Delete</Button>
 
+      <div >
+        <TextField label="first" variant="filled" color="success" focused onChange={e => setFirst(e.target.value)} />
+        <TextField label="last" variant="filled" color="success" focused onChange={e => setLast(e.target.value)} />
+        <TextField label="born" variant="filled" color="success" focused onChange={e => setBorn(e.target.value)} />
+      </div>
+
+
+
+      <Button variant="outlined" color="success" onClick={myData}>
+        MY DATA
+      </Button>
+
+
+      <Button variant="outlined" color="success" onClick={createFunc}>
+        DBへ保存
+      </Button>
+
+
+      <Button variant="outlined" color="success" onClick={read}>
+        DB読み取り
+      </Button>
+
+
+      <Button variant="outlined" color="success" onClick={handleUpdate}>
+        Update
+      </Button>
+
+      <Button variant="contained" color="success" onClick={handleDelete}>
+        Delete
+      </Button>
+
+
+
+
+
+      <div>      <Button onClick={toLogin}>ログアウト</Button>
+      </div>
 
     </div>
 
