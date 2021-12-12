@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { getApps, initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore, addDoc, collection, query, getDocs, doc, updateDoc } from 'firebase/firestore'
+import { getFirestore, addDoc, collection, query, getDocs, doc, updateDoc, deleteField } from 'firebase/firestore'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
@@ -185,7 +185,13 @@ export const updateData = async () => {
   });
 };
 
+export const deleteData = async () => {
+  const cityRef = doc(db, 'users', '81NfTOeEcs3aaEnfYDhY');
+  await updateDoc(cityRef, {
+    capital: deleteField()
+  });
 
+}
 
 
 

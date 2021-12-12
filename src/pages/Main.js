@@ -6,7 +6,7 @@ import {
 //import { Button } from "@mui/material/Button"
 //import { Button } from '@mui/material';
 import Button from '@material-ui/core/Button'
-import { logout, user, createDataInFirebase, readData, updateData } from '../config/firebase'
+import { logout, user, createDataInFirebase, readData, updateData, deleteData } from '../config/firebase'
 import Avatar from '@mui/material/Avatar';
 
 
@@ -49,6 +49,12 @@ const Main = () => {
     await updateData();
   };
 
+  const handleDelete = async () => {
+    await deleteData();
+  };
+
+
+
   return (
     <div>
 
@@ -65,7 +71,7 @@ const Main = () => {
       <Button onClick={createFunc}>DBへ保存</Button>
       <Button onClick={read}>DB読み取り</Button>
       <Button onClick={handleUpdate}>Update</Button>
-
+      <Button onClick={handleDelete}>Delete</Button>
 
 
     </div>
