@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { getApps, initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore, addDoc, collection, query, getDocs, doc, updateDoc, deleteField } from 'firebase/firestore'
+import { getFirestore, addDoc, collection, query, getDocs, doc, updateDoc, deleteField, deleteDoc } from 'firebase/firestore'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
@@ -61,14 +61,12 @@ export const googleLogin = async () => {
 
 }
 
-
 const apps = getApps
 if (!apps.length) {
   initializeApp(firebaseConfig)
 }
 
 export const auth = getAuth();
-
 
 export const createUser = async (email, password) => {
   // eslint-disable-next-line 
@@ -133,7 +131,6 @@ export const logout = async () => {
   return result3
 }
 
-
 export const user = auth.currentUser;
 if (user !== null) {
   // The user object has basic properties such as display name, email, etc.
@@ -147,7 +144,6 @@ if (user !== null) {
   // you have one. Use User.getToken() instead.
   const uid = user.uid;
 }
-
 
 export const db = getFirestore();
 
@@ -190,8 +186,17 @@ export const deleteData = async () => {
   await updateDoc(cityRef, {
     capital: deleteField()
   });
-
 }
+
+export const deletUserData = async () => {
+  await deleteDoc(doc(db, 'users', '4nhJ7s6hIdOfhxTk7ZO2'));
+}
+
+
+
+
+
+
 
 
 
