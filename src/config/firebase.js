@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { getApps, initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore, addDoc, collection, query, getDocs, doc, updateDoc, deleteField, deleteDoc } from 'firebase/firestore'
+import { getFirestore, addDoc, collection, query, getDocs, doc, updateDoc, deleteField, deleteDoc, setDoc } from 'firebase/firestore'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
@@ -165,6 +165,15 @@ export const createDataInFirebase = async () => {
   return returnObj
 }
 
+export const createDataSpecialInFirebase = async () => {
+  await setDoc(doc(db, "users", "programmingAcademy"), {
+    first: "AdaAda",
+    last: "lovelace",
+    born: 1815
+  });
+}
+
+
 export const readData = async () => {
   console.log('readData')
   const q = query(collection(db, "users"));
@@ -182,17 +191,33 @@ export const updateData = async () => {
 };
 
 export const deleteData = async () => {
-  const cityRef = doc(db, 'users', '81NfTOeEcs3aaEnfYDhY');
+  const cityRef = doc(db, 'users', 'programmingAcademy');
   await updateDoc(cityRef, {
     capital: deleteField()
   });
 }
 
 export const deletUserData = async () => {
-  await deleteDoc(doc(db, 'users', '4nhJ7s6hIdOfhxTk7ZO2'));
+  await deleteDoc(doc(db, 'users', 'programmingAcademy'));
 }
 
 
+export const myDataInFirebase = async (first, last, born) => {
+  let returnObj = ""
+  console.log('firebase start')
+  try {
+    const docRef = await addDoc(collection(db, "users"), {
+      first: { first },
+      last: { last },
+      born: { born }
+    });
+    returnObj = "test1"
+    console.log("Document written with ID:", docRef.id);
+  } catch (e) {
+    returnObj = "test2"
+    console.error("Error adding document: ", e);
+  }
+}
 
 
 

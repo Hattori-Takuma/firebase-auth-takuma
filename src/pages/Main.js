@@ -7,7 +7,7 @@ import {
 //import { Button } from '@mui/material';
 import Button from '@material-ui/core/Button'
 import TextField from '@mui/material/TextField';
-import { logout, user, createDataInFirebase, readData, updateData, deleteData, deletUserData } from '../config/firebase'
+import { myDataInFirebase, logout, user, createDataInFirebase, readData, updateData, deleteData, deletUserData, createDataSpecialInFirebase } from '../config/firebase'
 import Avatar from '@mui/material/Avatar';
 import { getFirestore, addDoc, collection } from 'firebase/firestore'
 
@@ -58,6 +58,10 @@ const Main = () => {
   }
 
 
+  const handleCreateDataSpecialInFirebase = async () => {
+    await createDataSpecialInFirebase();
+  }
+
 
 
   const [first, setFirst] = useState()
@@ -68,20 +72,9 @@ const Main = () => {
 
 
   const myData = async () => {
-    let returnObj = ""
-    console.log('firebase start')
-    try {
-      const docRef = await addDoc(collection(db, "users"), {
-        first: { first },
-        last: { last },
-        born: { born }
-      });
-      returnObj = "test1"
-      console.log("Document written with ID:", docRef.id);
-    } catch (e) {
-      returnObj = "test2"
-      console.errror("Error adding document: ", e);
-    }
+    myDataInFirebase(first, last, born)
+
+
   }
 
   return (
@@ -126,6 +119,10 @@ const Main = () => {
         Update
       </Button>
 
+      <Button variant="outlined" onClick={handleCreateDataSpecialInFirebase}>
+        programmingAcademy
+      </Button>
+
       <Button variant="contained" style={{ color: "red" }} onClick={handleUserData}>
         usersDelete
       </Button>
@@ -133,6 +130,9 @@ const Main = () => {
       <Button variant="contained" style={{ color: "red" }} onClick={handleDelete}>
         フィールドDelete
       </Button>
+
+
+
 
       <div>      <Button onClick={toLogin}>ログアウト</Button>
       </div>
