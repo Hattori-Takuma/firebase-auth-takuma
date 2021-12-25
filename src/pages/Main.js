@@ -7,7 +7,7 @@ import {
 //import { Button } from '@mui/material';
 import Button from '@material-ui/core/Button'
 import TextField from '@mui/material/TextField';
-import { myDataInFirebase, logout, user, createDataInFirebase, readData, updateData, deleteData, deletUserData, createDataSpecialInFirebase } from '../config/firebase'
+import { selectGetData, getData, myDataInFirebase, logout, user, createDataInFirebase, readData, updateData, deleteData, deletUserData, createDataSpecialInFirebase } from '../config/firebase'
 import Avatar from '@mui/material/Avatar';
 import { getFirestore, addDoc, collection } from 'firebase/firestore'
 
@@ -73,9 +73,18 @@ const Main = () => {
 
   const myData = async () => {
     myDataInFirebase(first, last, born)
-
-
   }
+
+
+  const handleGet = async () => {
+    await getData()
+  }
+
+
+  const handleSelectGet = async () => {
+    await selectGetData()
+  }
+
 
   return (
     <div>
@@ -133,9 +142,27 @@ const Main = () => {
 
 
 
+      <div>
+        <Button variant="contained" style={{ color: "black" }} onClick={handleGet}>
+          GetData
+      </Button>
+
+        <Button variant="contained" style={{ color: "black" }} onClick={handleSelectGet}>
+          GetData(born1996)
+      </Button>
+
+
+
+      </div>
+
+
+
 
       <div>      <Button onClick={toLogin}>ログアウト</Button>
       </div>
+
+
+
 
     </div>
 

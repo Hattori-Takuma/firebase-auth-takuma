@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { getApps, initializeApp } from 'firebase/app'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore, addDoc, collection, query, getDocs, doc, updateDoc, deleteField, deleteDoc, setDoc } from 'firebase/firestore'
+import { query, where, getFirestore, addDoc, collection, getDocs, doc, updateDoc, deleteField, deleteDoc, setDoc, onSnapshot, getDoc } from 'firebase/firestore'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
@@ -207,9 +207,9 @@ export const myDataInFirebase = async (first, last, born) => {
   console.log('firebase start')
   try {
     const docRef = await addDoc(collection(db, "users"), {
-      first: { first },
-      last: { last },
-      born: { born }
+      first: first,
+      last: last,
+      born: born
     });
     returnObj = "test1"
     console.log("Document written with ID:", docRef.id);
@@ -218,6 +218,23 @@ export const myDataInFirebase = async (first, last, born) => {
     console.error("Error adding document: ", e);
   }
 }
+
+export const getData = async () => {
+  const querySnapshot = await getDocs(collection(db, "users"));
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+  });
+}
+
+export const selectGetData = async () => {
+  const querySnapshot = await getDocs(collection(db, "users"), where("born", "==", "1996"));
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log(doc.id, " => ", doc.data());
+  });
+}
+
 
 
 
