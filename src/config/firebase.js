@@ -228,13 +228,15 @@ export const getData = async () => {
 }
 
 export const selectGetData = async () => {
-  const querySnapshot = await getDocs(collection(db, "users"), where("born", "==", "1996"));
+
+  const q = query(collection(db, "users"), where("born", "==", "1996"));
+
+  const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
     console.log(doc.id, " => ", doc.data());
   });
 }
-
 
 
 
